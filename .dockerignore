@@ -1,0 +1,43 @@
+# 忽略不需要的文件和目录
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# 测试结果和输出
+test_results/
+results/
+*.log
+
+# IDE文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+
+# 模型和模板文件（通常很大，建议通过数据卷挂载）
+# models/
+# templates/
+
+# 文档和其他
+README.md
+*.md
+bin/
+docs/
+
+# Docker文件本身
+Dockerfile
+.dockerignore
+docker-compose.yml
+

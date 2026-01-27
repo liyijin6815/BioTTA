@@ -1,0 +1,137 @@
+# BioTTA配置文件
+# 用于胎儿生物测量分析和端点定位
+# 支持单个文件或批量处理
+
+# ============ 输入/输出路径 ============
+paths:
+  # 输入数据路径（单个文件或文件夹）
+  # 如果为文件夹，将处理其中的所有.nii.gz文件
+  # 如果为单个文件，只处理该文件
+  input_data: ""  # 如果为空，需要在命令行参数中指定: --input <path>
+  
+  # 输出路径
+  output_dir: "./results"
+  
+  # 模型路径
+  step1_model: "./models/step1_length_MinValLoss.pth"  # 长度预测模型
+  step2_model: "./models/step2_biometry_MinValLoss.pth"  # TTA基础模型（用于初始化）
+  
+  # 模板路径（用于Step2的图谱配准约束）
+  template:
+    image_folder: "./templates/template_image"  # 模板图像文件夹
+    label_folder: "./templates/template_label"  # 模板标签文件夹
+    registered_folder: ""  # 反配准后的模板标签文件夹
+  
+  development_curves: "./development_curves"
+
+# ============ 数据配置 ============
+data:
+  # 年龄文件路径（用于匹配模板）
+  # CSV格式，需包含文件名列和年龄列
+  age_file: ""  # 如果为空，将尝试从文件名推断或使用默认年龄
+  
+  # 年龄文件格式（如果提供了age_file）
+  age_file_format:
+    name_column: "name"  # 文件名列名
+    age_column: "age"  # 年龄列名
+  
+  # 生物测量列表（11个长度）
+  biometry_list: 
+    - "RLV_A"
+    - "LLV_A"
+    - "RLV_C"
+    - "LLV_C"
+    - "BBD"
+    - "CBD"
+    - "TCD"
+    - "FOD"
+    - "AVD"
+    - "VH"
+    - "CCL"
+  
+  # 长度权重（用于Step1的损失计算）
+  length_weights: [10.0, 10.0, 10.0, 10.0, 1.5, 1.5, 0.6, 1.0, 3.0, 3.0, 1.0]
+  
+  # 侧脑室索引（用于Step1）
+  ventricle_indices: [0, 1, 2, 3]
+
+# ============ 系统配置 ============
+system:
+  gpu_id: "5"  # 使用的GPU ID，如果为空则自动选择
+  num_workers: 2  # 数据加载器工作进程数
+  seed: 1  # 随机种子
+  
+  # 中间结果保存（用于调试）
+  save_intermediate:
+    step1_results: false  # 保存step1的长度预测结果CSV
+    step2_heatmaps: false  # 保存step2的热图（会占用大量空间）
+    step2_tta_models: true  # 保存每个样本的TTA模型（用于跳过重复计算）
+    step2_landmarks_txt: true  # 保存原始的landmarks.txt文件
+    step2_landmarks_txt_original: true # 保存在原尺寸图像上的landmarks.txt文件
+    step2_landmarks_image: true  # 保存landmarks.png可视化图像
+    step2_length_centile_csv: true # 保存长度百分位曲线表
+    step2_length_centile_plot: true # 保存长度百分位曲线图（网页版+pdf版）
+
+# ============ Step1 参数（长度预测）============
+step1:
+  batch_size: 4
+  
+  # 模型配置
+  model:
+    in_channels: 1
+    num_classes: 11  # 11个长度
+    filters: 64
+    dropout: 0.4
+
+# ============ Step2 参数（TTA端点定位）============
+step2:
+  batch_size: 1
+  channel: 22  # 热图通道数（对应22个端点）
+  
+  # TTA训练参数
+  init_temp: 0.5  # 温度参数（用于可微分地标检测）
+  topk: 50  # TopK采样
+  learning_rate: 0.0005
+  num_epoch: 5
+  
+  # 损失函数权重
+  lambda_entropy_loss: 0.5
+  lambda_length_loss: 1.5
+  lambda_boundarygrad_loss: 300
+  
+  # 点对和半径配置（11个长度对应22个端点）
+  point_pairs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  radius: [6, 20, 6, 20, 20, 20, 5, 5, 5, 5, 5] # 疾病预测可调
+  
+  # 模板约束参数
+  template_label_scale: 1
+  template_label_pan: 0.25
+  
+  # 方向配置（用于可视化和坐标提取）
+  orientations: [2, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0]
+  
+  # 模板热图编号映射（22个端点对应的模板热图编号）
+  template_heatmap_number: [1, 2, 3, 4, 9, 10, 11, 12, 13, 14, 13, 14, 17, 18, 23, 24, 25, 26, 27, 28, 29, 30]
+  
+  # 是否跳过TTA训练（如果已有训练好的模型）
+  skip_tta: false
+  
+  # 是否使用已有TTA模型（优先于skip_tta）
+  # 如果为true，将在output_dir中查找每个样本的tent_TTA.pth
+  use_existing_tta: false
+
+# ============ 输出格式 ============
+output:
+  # 输出格式：json（只支持JSON格式）
+  format: "json"
+  
+  # JSON输出配置
+  json:
+    # 是否格式化输出（易读）
+    indent: 2
+  
+  # 是否生成可视化图像
+  save_visualization: true
+  
+  # 输出文件名
+  filename: "results"  # 实际文件名将是 results.csv 和 results.json
