@@ -25,7 +25,7 @@ The framework operates in two stages:
 To facilitate clinical translation, we further developed an automated web-based reporting system built upon the BioTTA framework. This end-to-end tool allows clinicians to upload 3D fetal MRI volumes (DICOM/NIfTI) and gestational age, automatically executing the full pipeline from preprocessing to biometry. The system generates an interactive HTML dashboard featuring a 3D viewer for slice navigation and quantitative analysis, where predicted measurements are dynamically mapped to standard growth trajectories to assist in risk stratification for developmental anomalies. Reports can be exported as standardized PDFs for clinical archiving, streamlining the diagnostic workflow and providing objective, consistent quantitative evidence for multi-center research.
 
 
-https://github.com/user-attachments/assets/de7724a6-f8f2-4bfd-aa86-bd18e42b8278
+https://github.com/user-attachments/assets/a05f2f41-c7ac-483d-a41b-3968ff314139
 
 
 ## Key Features
