@@ -33,9 +33,9 @@ https://github.com/user-attachments/assets/a05f2f41-c7ac-483d-a41b-3968ff314139
 
 ## Key Features
 
-1. **Precise & Consistent Biometry**: Delivers highly accurate quantification for 11 standard clinical fetal brain biometric measurements. Extensive experiments demonstrate that the method achieves superior consistency and performance compared to baselines.
+1. **Precise & Consistent Biometry**: Delivers highly accurate quantification for 11 standard clinical fetal brain biometric measurements. Comparison experiments demonstrate the superior consistency and performance compared to baselines.
 
-2. **Robust Domain Generalization**: Effectively mitigates domain shifts arising from diverse centers, scanner manufacturers, reconstruction methods (e.g., NiftyMIC, NeSVoR), and pathological conditions (e.g., GMH-IVH, VM, and cerebellar abnormalities).
+2. **Robust Domain Generalization**: Mitigates domain shifts arising from diverse centers, scanner manufacturers, reconstruction methods (e.g., NiftyMIC, NeSVoR), and pathological conditions (e.g., GMH-IVH, VM, and cerebellar abnormalities).
 
 3. **Source-Free & Unsupervised**: Performs adaptation on the target domain without accessing source data or requiring target ground-truth labels.
 
