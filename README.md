@@ -33,16 +33,15 @@ https://github.com/user-attachments/assets/a05f2f41-c7ac-483d-a41b-3968ff314139
 
 ## Key Features
 
-1. **Robust Domain Generalization**: Effectively mitigates domain shifts across different scanners and reconstruction methods (e.g., NiftyMIC, NeSVoR).
+1. **Precise & Consistent Biometry**: Delivers highly accurate quantification for 11 standard clinical fetal brain biometric measurements. Extensive experiments demonstrate that the method achieves superior consistency and performance compared to baselines.
 
-2. **Source-Free & Unsupervised**: Performs adaptation on the target domain without accessing source data or requiring target ground-truth labels.
+2. **Robust Domain Generalization**: Effectively mitigates domain shifts arising from diverse centers, scanner manufacturers, reconstruction methods (e.g., NiftyMIC, NeSVoR), and pathological conditions (e.g., GMH-IVH, VM, and cerebellar abnormalities).
 
-3. **End-to-End Workflow**: Integrates length prediction and landmark localization into a single pipeline.
+3. **Source-Free & Unsupervised**: Performs adaptation on the target domain without accessing source data or requiring target ground-truth labels.
 
-4. **Automated Biometry Reporting**: Supports 11 standard clinical fetal brain biometric measurements (e.g., BBD, TCD, FOD).
+4. **End-to-End Clinical Reporting System**: Provides a unified framework designed to directly assist physicians in clinical reading and diagnosis. By seamlessly integrating landmark localization with automated reporting, the system significantly streamlines the diagnostic workflow and supports objective decision-making.
 
    
-
 ## Installation
 
 ### Option 1: Install via pip
