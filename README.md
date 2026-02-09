@@ -39,7 +39,7 @@ https://github.com/user-attachments/assets/a05f2f41-c7ac-483d-a41b-3968ff314139
 
 3. **Source-Free & Unsupervised**: Performs adaptation on the target domain without accessing source data or requiring target ground-truth labels.
 
-4. **End-to-End Clinical Reporting System**: Provides a unified framework designed to directly assist physicians in clinical reading and diagnosis. By seamlessly integrating landmark localization with automated reporting, the system significantly streamlines the diagnostic workflow and supports objective decision-making.
+4. **End-to-End Clinical Reporting System**: Provides a unified framework designed to directly assist radiologists in clinical reading and diagnosis. By seamlessly integrating measurement with automated reporting, the system significantly streamlines the diagnostic workflow and supports objective decision-making.
 
    
 ## Installation
